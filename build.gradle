@@ -3,6 +3,8 @@ plugins {
 	id 'org.springframework.boot' version '3.0.1'
 	id 'io.spring.dependency-management' version '1.1.0'
 	id 'org.graalvm.buildtools.native' version '0.9.18'
+
+	id "com.diffplug.spotless" version "6.12.0"
 }
 
 group = 'com.github.eowiz'
@@ -31,4 +33,17 @@ dependencyManagement {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+spotless {
+	ratchetFrom 'origin/main'
+
+	java {
+		toggleOffOn()
+		importOrder('java|javax', 'com.github.eowiz', '', '\\#com.github.eowiz', '\\#')
+		removeUnusedImports()
+		formatAnnotations()
+
+		googleJavaFormat()
+	}
 }
