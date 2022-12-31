@@ -21,7 +21,14 @@ ext {
 }
 
 dependencies {
+	// Spring Boot
 	implementation 'org.springframework.shell:spring-shell-starter'
+
+	// Jackson
+	implementation 'com.fasterxml.jackson.core:jackson-core:2.14.1'
+	implementation 'com.fasterxml.jackson.module:jackson-module-jsonSchema:2.14.1'
+
+	// Test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
