@@ -1,0 +1,70 @@
+th": "cz-emoji",
+  "config": {
+    "cz-emoji": {
+      "subjectMaxLength": 72,
+      "skipQuestions": ["scope"],
+      "types": [
+        {
+          "name": "feat",
+          "code": "feat: :+1:",
+          "emoji": "👍",
+          "description": "Feature"
+        },
+        {
+          "name": "fix",
+          "code": "fix: :bug:",
+          "emoji": "🐛",
+          "description": "Fix"
+        },
+        {
+          "name": "wip",
+          "code": "wip: :construction:",
+          "emoji": "🚧",
+          "description": "WIP"
+        },
+        {
+          "name": "chore",
+          "code": "chore: :paperclip:",
+          "emoji": "📎",
+          "description": "Chore"
+        },
+        {
+          "name": "style",
+          "code": "style: :sparkles:",
+          "emoji": "✨",
+          "description": "Style"
+        },
+        {
+          "name": "docs",
+          "code": "docs: :notebook:",
+          "emoji": "📓",
+          "description": "Documents"
+        },
+        {
+          "name": "perf",
+          "code": "perf: :zap:",
+          "emoji": "⚡",
+          "description": "Performance"
+        },
+        {
+          "name": "refactor",
+          "code": "refactor: :bulb:",
+          "emoji": "💡",
+          "description": "Refactoring"
+        },
+        {
+          "name": "test",
+          "code": "test: :100:",
+          "emoji": "💯",
+          "description": "Test"
+        },
+        {
+          "name": "release",
+          "code": "release :tada:",
+          "emoji": "🎉",
+          "description": "Release"
+        }
+      ]
+    }
+  }
+}

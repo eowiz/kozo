@@ -1,0 +1,13 @@
+{
+  "devDependencies": {
+    "@commitlint/cli": "^17.3.0",
+    "@commitlint/config-conventional": "^17.3.0",
+    "git-cz": "^4.9.0",
+    "husky": "^8.0.2",
+    "yarn": "^1.22.19"
+  },
+  "scripts": {
+    "prepare": "husky install",
+    "commit": "git cz"
+  }
+}
