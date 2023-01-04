@@ -1,6 +1,8 @@
 plugins {
 	id 'java'
 	id 'application'
+	id 'maven-publish'
+	id 'org.hibernate.build.maven-repo-auth' version '3.0.4'
 	id 'org.graalvm.buildtools.native' version '0.9.19'
 
 	id "com.diffplug.spotless" version "6.12.0"
@@ -21,8 +23,26 @@ java {
 	}
 }
 
+jar {
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+	manifest {
+		attributes 'Main-Class': application.mainClass
+	}
+
+	from {
+		configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+	}
+}
+
 repositories {
 	mavenCentral()
+
+	maven {
+		name = 'github'
+		url = 'https://maven.pkg.github.com/eowiz/pebble'
+	}
+	maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -30,12 +50,19 @@ dependencies {
 	implementation 'info.picocli:picocli:4.7.0'
 	annotationProcessor 'info.picocli:picocli-codegen:4.7.0'
 
-	// Jackson
-	implementation 'com.fasterxml.jackson.core:jackson-core:2.14.1'
-	implementation 'com.fasterxml.jackson.module:jackson-module-jsonSchema:2.14.1'
+	// JSON Schema
+	implementation 'com.github.saasquatch:json-schema-inferrer:0.1.5'
+
+	// Pebble
+	implementation 'com.github.eowiz:pebble:0.0.1-SNAPSHOT'
+
+	// Logger
+	implementation 'org.slf4j:slf4j-api:2.0.6'
+	implementation 'ch.qos.logback:logback-core:1.4.5'
+	implementation 'ch.qos.logback:logback-classic:1.4.5'
 
 	// Test
-	testImplementation 'org.junit:junit-bom:5.9.1'
+	testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
 	testImplementation 'org.assertj:assertj-core:3.23.1'
 }
 
@@ -45,6 +72,19 @@ compileJava {
 
 tasks.named('test') {
 	useJUnitPlatform()
+
+	jvmArgs '-agentlib:native-image-agent=access-filter-file=src/test/resources/access-filter.json,config-output-dir=ml'
+}
+
+graalvmNative {
+	binaries {
+		main {
+			buildArgs.add('--no-fallback')
+		}
+		test {
+			buildArgs.add('--no-fallback')
+		}
+	}
 }
 
 spotless {
