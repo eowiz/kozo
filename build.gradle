@@ -48,7 +48,7 @@ repositories {
 dependencies {
 	// picocli
 	implementation 'info.picocli:picocli:4.7.1'
-	annotationProcessor 'info.picocli:picocli-codegen:4.7.0'
+	annotationProcessor 'info.picocli:picocli-codegen:4.7.1'
 
 	// JSON Schema
 	implementation 'com.github.saasquatch:json-schema-inferrer:0.1.5'
